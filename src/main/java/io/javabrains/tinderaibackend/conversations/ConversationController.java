@@ -24,7 +24,7 @@ public class ConversationController {
 
     ;
 
-    @PostMapping("/conversations")
+    /*@PostMapping("/conversations")
     public Conversation createNewConversation(@RequestBody CreateConversationRequest request) {
 
         profileRepository.findById(request.profileId())
@@ -39,7 +39,7 @@ public class ConversationController {
 
         conversationRepository.save(conversation);
         return conversation;
-    }
+    }*/
 
     @GetMapping("conversations/{conversationId}")
     public Conversation getConversation(@PathVariable String conversationId) {
