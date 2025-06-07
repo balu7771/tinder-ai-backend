@@ -1,4 +1,7 @@
 # Tinder AI Backend
+Hi , This is Balaji Mudipalli,
+I created this project so that I can learn how to integrate with AI. 
+This will be deployed in AWS so that others can use as well. 
 
 A Spring Boot application that simulates a Tinder-like backend with AI-powered features. This project was created based on the tutorial from [JavaBrains YouTube channel](https://youtu.be/k3fSQpz2Esg?si=eRGikIBwo1nLGGMS).
 
