@@ -4,6 +4,12 @@ import io.javabrains.tinderaibackend.conversations.Conversation;
 import io.javabrains.tinderaibackend.conversations.ConversationRepository;
 import io.javabrains.tinderaibackend.profiles.Profile;
 import io.javabrains.tinderaibackend.profiles.ProfileRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +23,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
+@Tag(name = "Match", description = "Match management APIs")
 public class MatchController {
 
     private final ConversationRepository conversationRepository;
@@ -31,6 +38,16 @@ public class MatchController {
 
     public record CreateMatchRequest(String profileId){}
 
+    @Operation(
+        summary = "Create a new match",
+        description = "Creates a new match with the specified profile and initializes a conversation"
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Match created successfully", 
+                    content = @Content(schema = @Schema(implementation = Match.class))),
+        @ApiResponse(responseCode = "404", description = "Profile not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @PostMapping("/matches")
     public Match createNewMatch(@RequestBody MatchController.CreateMatchRequest request) {
 
@@ -55,6 +72,14 @@ public class MatchController {
         return match;
     }
 
+    @Operation(
+        summary = "Get all matches",
+        description = "Returns a list of all matches"
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Successful operation"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/matches")
     public List<Match> getAllMatches() {
         return matchRepository.findAll();

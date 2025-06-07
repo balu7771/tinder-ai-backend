@@ -158,7 +158,7 @@ public class ProfileCreationService {
             ImageResponse imageResponse = gson.fromJson(response.body(), ImageResponse.class);
 
             if (imageResponse.images() != null && !imageResponse.images().isEmpty()) {
-                saveImageBytes(profile.imageUrl(), Base64.getDecoder().decode(imageResponse.images().getFirst()));
+                saveImageBytes(profile.imageUrl(), Base64.getDecoder().decode(imageResponse.images().get(0)));
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Error generating profile image", e);
